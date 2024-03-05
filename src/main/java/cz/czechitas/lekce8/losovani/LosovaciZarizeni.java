@@ -85,8 +85,9 @@ public class LosovaciZarizeni {
      * @return Stream vylosovaných čísel.
      */
     public IntStream losovatSeznamSudychCisel(int minimum, int maximum, int pocet) {
-        return random.ints(pocet, minimum, maximum)
-                .filter(cislo -> cislo % 2 == 0);
+        return random.ints(minimum, maximum)
+                .filter(cislo -> cislo % 2 == 0)
+                .limit(pocet);
     }
 
     /**

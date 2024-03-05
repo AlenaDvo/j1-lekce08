@@ -1,5 +1,6 @@
 package cz.czechitas.lekce8.losovani;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class AplikaceLosovani {
@@ -27,6 +28,33 @@ public class AplikaceLosovani {
         Stream<Integer> sance = losovaciZarizeni.losovatSanci();
         System.out.println("V Šanci byla tažena čísla:");
         sance.forEachOrdered(this::vypsatVylosovaneCislo);
+
+//        // zkouseni Optional
+//        Optional<Integer> first = sance.findFirst();
+//        if (first.isPresent()) {
+//            Integer cislo = first.get();
+//            System.out.println("Na kotce padlo cislo: " + cislo);
+//        } else {
+//            System.out.println("Kostka se ztratila!");
+//        }
+//
+//        Integer cislo = first.orElse(6);
+//
+//        Optional<String> email = Optional.ofNullable(6);
+//        // konec zkouseni Optional
+
+        // zkouseni Streamu
+//        private void test() {
+//            Osoba osoba = new Osoba();
+//            Adresa adresa = osoba.getAdresa();
+//            Mesto mesto = adresa.getMesto();
+//            int pocetObyvatel = mesto.getPocetObyvatel();
+//
+////            fluent zapis
+//            int pocetObyvatel = new Osoba().getAdresa().getMesto().getPocetObyvatel();
+//        }
+        // konec zkouseni Streamu
+
 
         System.out.println();
         System.out.println("Výhercům gratulujeme.");
