@@ -33,7 +33,7 @@ public class AplikaceLosovani {
 //        Optional<Integer> first = sance.findFirst();
 //        if (first.isPresent()) {
 //            Integer cislo = first.get();
-//            System.out.println("Na kotce padlo cislo: " + cislo);
+//            System.out.println("Na kostce padlo cislo: " + cislo);
 //        } else {
 //            System.out.println("Kostka se ztratila!");
 //        }
