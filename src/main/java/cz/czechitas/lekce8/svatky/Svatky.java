@@ -27,6 +27,10 @@ public class Svatky {
         );
     }
 
+//    private static boolean zenskeJmeno(Svatek svatek) {
+//        return svatek.gender().equals(Gender.ZENA);
+//    }
+
     public Stream<Svatek> nacistSeznamSvatku() {
         try {
             Path path = Paths.get(Svatky.class.getResource("svatky.txt").toURI());
@@ -66,7 +70,9 @@ public class Svatky {
      */
     public Stream<String> nacistSeznamSvatkuMuzu() {
         //TODO implementovat pomosí lambda výrazu
-        return null;
+        return nacistSeznamSvatku()
+                .filter(svatek -> svatek.gender().equals(Gender.MUZ))
+                .map(svatek -> svatek.jmeno());
     }
 
     /**
@@ -76,7 +82,9 @@ public class Svatky {
      */
     public Stream<String> nacistSeznamSvatkuZen() {
         //TODO implementovat pomocí method reference
-        return null;
+        return nacistSeznamSvatku()
+                .filter(Svatek::jeZena)
+                .map(Svatek::jmeno);
     }
 
     /**
@@ -86,7 +94,9 @@ public class Svatky {
      */
     public Stream<String> urcitSvatkyProDen(MonthDay den) {
         //TODO
-        return null;
+        return nacistSeznamSvatku()
+                .filter(svatek -> svatek.den().equals(den))
+                .map(Svatek::jmeno);
     }
 
     /**
@@ -97,7 +107,10 @@ public class Svatky {
      */
     public Stream<String> nacistZenskaJmenaVMesici(Month mesic) {
         //TODO
-        return null;
+        return nacistSeznamSvatku()
+                .filter(Svatek::jeZena)
+                .filter(svatek -> svatek.den().getMonth().equals(mesic))
+                .map(Svatek::jmeno);
     }
 
     /**
@@ -107,7 +120,10 @@ public class Svatky {
      */
     public long zjistitPocetMuzskychSvatkuPrvniho() {
         //TODO
-        return 0;
+        return nacistSeznamSvatku()
+                .filter(svatek -> svatek.gender() == Gender.MUZ)
+                .filter(svatek -> svatek.den().getDayOfMonth() == 1)
+                .count();
     }
 
     /**
@@ -115,6 +131,14 @@ public class Svatky {
      */
     public void vypsatJmenaListopad() {
         //TODO
+        System.out.println(
+                nacistSeznamSvatku()
+                        .filter(svatek -> svatek.den().getMonth() == Month.NOVEMBER)
+                        .map(Svatek::jmeno)
+                        .toList()
+//                .forEach(System.out::println);
+        )
+        ;
     }
 
     /**
@@ -122,7 +146,10 @@ public class Svatky {
      */
     public long zjistitPocetUnikatnichJmen() {
         //TODO
-        return 0;
+        return nacistSeznamSvatku()
+                .map(Svatek::jmeno)
+                .distinct()
+                .count();
     }
 
     /**
@@ -132,7 +159,10 @@ public class Svatky {
      */
     public Stream<String> urcitJmenavCervnuVynechatPrvnichDeset() {
         //TODO
-        return null;
+        return nacistSeznamSvatku()
+                .filter(svatek -> svatek.den().getMonth() == Month.JUNE)
+                .map(Svatek::jmeno)
+                .skip(10);
     }
 
     /**
@@ -142,6 +172,10 @@ public class Svatky {
      */
     public Stream<String> urcitJmenaOdVanoc() {
         //TODO
-        return null;
+        return nacistSeznamSvatku()
+                .filter(svatek -> svatek.den().getMonth() == Month.DECEMBER)
+                .filter(svatek -> svatek.den().getDayOfMonth() >= 24)
+//                .filter(svatek -> svatek.den().getDayOfMonth() <= 31)
+                .map(Svatek::jmeno);
     }
 }
